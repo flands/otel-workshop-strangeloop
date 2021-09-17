@@ -4,16 +4,15 @@ Notes:
 
 to build/run in docker:
 
-` $ ./gradlew jibDockerBuilder `
+` $ ./gradlew build `
 
+` $ docker run -p8080:80 otel-workshop `
 
-` $ docker run -p8080:8080 otel-workshop:1.0-SNAPSHOT `
-
-OR better yet, for the whole suite:
+OR better yet, for the whole suite (after doing a `./gradlew build`):
 
 ` $ cd ../docker; docker-compose up `
 
-To hit the url:
+To hit the url from outside the container:
 
 ` $ curl http://localhost:8080/hello/proxy/java `
 

@@ -28,6 +28,9 @@ jib {
     container {
         jvmFlags += "-Xmx128M"
     }
+    to {
+        tags = ['latest']
+    }
 }
 
 build {
