@@ -4,3 +4,11 @@ services:
     image: otel-workshop:1.0-SNAPSHOT
     ports:
       - "8080:80" ## expose 8080 outside of docker-land as an entrypoint, but keep 80 as the internal port.
+    depends_on:
+      - jaeger
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686" # frontend
+      - "14268:14268" # thrift ingest
+      - "14250"       # proto ingest
