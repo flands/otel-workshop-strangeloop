@@ -6,6 +6,13 @@ services:
       - "8080:80" ## expose 8080 outside of docker-land as an entrypoint, but keep 80 as the internal port.
     depends_on:
       - jaeger
+  node:
+    build:
+      context: ../node
+    ports:
+      - "3000:80"
+    depends_on:
+      - jaeger
   jaeger:
     image: jaegertracing/all-in-one:latest
     ports:

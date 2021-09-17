@@ -29,7 +29,7 @@ public class Main {
 
         Spark.port(80);
         Spark.get("/hello", (request, response) -> main.handleHelloRequest());
-        Spark.get("/hello/proxy/*", (request, response) -> main.handleProxyRequest(request, response));
+        Spark.get("/hello/proxy/*", main::handleProxyRequest);
     }
 
     private String handleHelloRequest() {
@@ -48,7 +48,7 @@ public class Main {
         List<String> rest = pieces.subList(1, pieces.size());
         String proxyTarget = pieces.get(0);
         URI uri;
-        if (rest.size() == 1) {
+        if (rest.size() == 0) {
             uri = URI.create("http://" + proxyTarget + "/hello");
         } else {
             uri = URI.create("http://" + proxyTarget + "/hello/proxy/" + String.join("/", rest));
