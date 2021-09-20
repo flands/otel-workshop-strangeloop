@@ -1,9 +1,10 @@
 version: "2"
 services:
   java:
-    image: otel-workshop:latest
+    build:
+      context: ../java
     ports:
-      - "8080:80" ## expose 8080 outside of docker-land as an entrypoint, but keep 80 as the internal port.
+      - "8080:80"
     depends_on:
       - jaeger
   node:

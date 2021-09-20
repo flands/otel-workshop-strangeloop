@@ -12,7 +12,6 @@ def hello():
 
 @app.route('/hello/proxy/<path:subpath>')
 def proxy(subpath):
-
     parts = subpath.split('/')
     proxyTarget = parts[0]
     rest = '/'.join(parts[1:])

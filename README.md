@@ -8,9 +8,8 @@ Prerequisites:
 Notes on getting the workshop up & running:
 
 ```
-$ cd java; ./gradlew build
 $ cd ../docker
-$ docker-compose up
+$ docker-compose up --build
 ```
 
 Java is listening outside docker on `8080`.
