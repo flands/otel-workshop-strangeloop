@@ -7,6 +7,9 @@ const { ConsoleSpanExporter } = require('@opentelemetry/sdk-trace-base');
 const { JaegerExporter } = require('@opentelemetry/exporter-jaeger');
 const { Resource } = require('@opentelemetry/resources');
 const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+const { diag, DiagConsoleLogger, DiagLogLevel} = require("@opentelemetry/api");
+
+diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG)
 
 // configure the SDK to export telemetry data to the console
 // enable all auto-instrumentations from the meta package
