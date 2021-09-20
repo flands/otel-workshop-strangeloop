@@ -13,6 +13,13 @@ services:
       - "3000:80"
     depends_on:
       - jaeger
+  python:
+    build:
+      context: ../python
+    ports:
+      - "5000:80"
+    depends_on:
+      - jaeger
   jaeger:
     image: jaegertracing/all-in-one:latest
     ports:
