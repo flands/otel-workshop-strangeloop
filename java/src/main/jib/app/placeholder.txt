@@ -1,1 +1,0 @@
-This is a file that will end up in the docker container in the /app directory.

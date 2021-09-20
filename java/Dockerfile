@@ -6,6 +6,8 @@ WORKDIR /home/work
 RUN gradle distTar
 RUN mkdir /app
 RUN cp build/distributions/*.tar /app/
+RUN cp opentelemetry-javaagent-all.jar /app/
+
 WORKDIR /app
 RUN tar -xvf /app/*.tar
 

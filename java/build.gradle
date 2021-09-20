@@ -18,7 +18,7 @@ java {
 
 application {
     mainClass = 'com.splunk.opentelemetry.workshop.Main'
-    applicationDefaultJvmArgs = ['-Xmx128M']
+    applicationDefaultJvmArgs = ['-Xmx128M', '-javaagent:opentelemetry-javaagent-all.jar']
 }
 
 dependencies {

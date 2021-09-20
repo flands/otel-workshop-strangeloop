@@ -11,6 +11,7 @@ const { diag, DiagConsoleLogger, DiagLogLevel} = require("@opentelemetry/api");
 
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG)
 
+console.log(process.env)
 // configure the SDK to export telemetry data to the console
 // enable all auto-instrumentations from the meta package
 const traceExporter = new JaegerExporter();

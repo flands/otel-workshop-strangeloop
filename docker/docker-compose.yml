@@ -20,6 +20,11 @@ services:
       - "3000:80"
     depends_on:
       - jaeger
+    environment:
+      OTEL_EXPORTER_JAEGER_ENDPOINT: "http://jaeger:14268/api/traces"
+      OTEL_SERVICE_NAME: "workshop-node-app"
+      OTEL_RESOURCE_ATTRIBUTES: "service.name=workshop-node-app"
+
   python:
     build:
       context: ../python
@@ -27,11 +32,6 @@ services:
       - "5000:80"
     depends_on:
       - jaeger
-    environment:
-#      OTEL_TRACES_EXPORTER: jaeger
-      OTEL_EXPORTER_JAEGER_ENDPOINT: "http://jaeger:14268/api/traces"
-      OTEL_SERVICE_NAME: "workshop-node-app"
-      OTEL_RESOURCE_ATTRIBUTES: "service.name=workshop-node-app"
 
   jaeger:
     image: jaegertracing/all-in-one:latest
