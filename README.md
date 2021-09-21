@@ -1,8 +1,6 @@
 # OpenTelemetry StrangeLoop Workshop
 
 Prerequisites:
-- Java 11
-  - Note: this could probably be mitigated if we build the app in docker itself, rather than externally.
 - Docker w/ docker-compose
 
 Notes on getting the workshop up & running:
