@@ -9,9 +9,9 @@ COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
 
 RUN pip install -r requirements.txt
+# docker build will cache the following step as well if requirements.txt did not change
+RUN opentelemetry-bootstrap -a=install
 
 COPY . /app
 
-ENTRYPOINT [ "python3" ]
-
-CMD [ "app.py" ]
+CMD [ "opentelemetry-instrument", "python3", "app.py" ]
