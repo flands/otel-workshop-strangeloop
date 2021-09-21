@@ -1,18 +1,27 @@
-TODO
-
 Notes:
 
 to build/run in docker:
 
-` $ ./gradlew build `
+` $ docker build -t otel-workshop-java . `
 
-` $ docker run -p8080:80 otel-workshop `
+` $ docker run -p8080:80 otel-workshop-java `
 
-OR better yet, for the whole suite (after doing a `./gradlew build`):
+Or better yet, for the whole suite of interconnected apps:
 
-` $ cd ../docker; docker-compose up `
+` $ cd ../docker; docker-compose up --build `
 
-To hit the url from outside the container:
+To hit the url from outside the docker compose environment:
 
 ` $ curl http://localhost:8080/hello/proxy/java `
 
+### How to instrument with OpenTelemetry's auto-instrumentation javaagent:
+
+- Download the `opentelemetry-javaagent-all.jar` from the [opentelemetry repository][otel-release]
+- Place the downloaded agent jar in the `java` directory (where this README.md file is located).
+- Add this line to the Dockerfile: `RUN cp opentelemetry-javaagent-all.jar /app/` below the other `RUN cp ...` command.
+- In the build.gradle file, inside the `application` block, change the `applicationDefaultJvmArgs` to be 
+  `['-Xmx128M', '-javaagent:opentelemetry-javaagent-all.jar']`
+- Rebuild and restart docker-compose, as above.
+
+
+[otel-release]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest
