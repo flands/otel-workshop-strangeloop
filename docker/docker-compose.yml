@@ -26,6 +26,9 @@ services:
       OTEL_RESOURCE_ATTRIBUTES: "service.name=workshop-node-app"
 
   python:
+    environment:
+      OTEL_TRACES_EXPORTER: jaeger_thrift
+      OTEL_SERVICE_NAME: workshop-python-app
     build:
       context: ../python
     ports:
