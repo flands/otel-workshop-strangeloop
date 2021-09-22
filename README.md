@@ -13,6 +13,7 @@ $ docker-compose up --build
 Java is listening outside docker on `8080`.
 Python is listening outside docker on `5000`.
 Node is listening outside docker on `3000`.
+Go is listening outside docker on `7070`.
 
 Exercise the API:
 
