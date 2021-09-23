@@ -35,6 +35,17 @@ services:
       OTEL_TRACES_EXPORTER: jaeger_thrift
       OTEL_SERVICE_NAME: workshop-python-app
 
+  go:
+    build:
+      context: ../go
+    ports:
+      - "7070:80"
+    depends_on:
+      - jaeger
+    environment:
+      OTEL_EXPORTER_JAEGER_ENDPOINT: "http://jaeger:14268/api/traces"
+      OTEL_SERVICE_NAME: "workshop-node-app"
+
   jaeger:
     image: jaegertracing/all-in-one:latest
     ports:
