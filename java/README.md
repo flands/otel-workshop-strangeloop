@@ -1,20 +1,33 @@
-Notes:
+# Java Workshop
 
-to build/run in docker:
+## Getting Started
 
-` $ docker build -t otel-workshop-java . `
+Start the suite of interconnected apps (it is OK to just instrument this service):
 
-` $ docker run -p8080:80 otel-workshop-java `
+```
+$ cd ../docker; docker-compose up --build
+```
 
-Or better yet, for the whole suite of interconnected apps:
+Then go to the url from outside the docker compose environment:
 
-` $ cd ../docker; docker-compose up --build `
+```
+$ curl http://localhost:8080/hello/proxy/java
+```
 
-To hit the url from outside the docker compose environment:
+You can also just build and start this application (instead of the full suite):
 
-` $ curl http://localhost:8080/hello/proxy/java `
+```
+$ docker build -t otel-workshop-java .
+$ docker run -p8080:80 otel-workshop-java
+```
 
-### How to instrument with OpenTelemetry's auto-instrumentation javaagent:
+## Lab 101: Automatically instrumenting this application with OpenTelemetry
+
+The [OpenTelemetry getting started
+documentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation#getting-started)
+covers the required steps.
+
+In summary, your task is to:
 
 - Download the [opentelemetry-javaagent-all.jar][otel-latest-jar] from the [opentelemetry repository][otel-release]
 - Place the downloaded agent jar in the `java` directory (where this README.md file is located).
@@ -29,6 +42,52 @@ To hit the url from outside the docker compose environment:
       OTEL_SERVICE_NAME: workshop-java-app
 ```
 - Rebuild and restart docker-compose, as above.
+- Run `curl  http://localhost:8080/` -- what happened?
+- Run `curl http://localhost:8080/hello` -- what happened?
+- Run `curl http://localhost:8080/hello/proxy/node/python` -- what happened?
+
+Assuming everything is configured properly, you should see the
+`workshop-java-app` service in Jaeger.
+
+## Lab 102: Send data to the OpenTelemetry Collector
+
+By default, auto-instrumentation sends data via OTLP on `localhost:4317`. In
+Lab 101 we overrode this via environment variables. Let's modify them:
+
+- In the `docker/docker-compose.yml` file, change the `environment` section of the java service:
+```
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otelcol:4317
+      OTEL_SERVICE_NAME: workshop-java-app
+```
+- Restart docker-compose as above.
+- Run `curl  http://localhost:8080/` -- what happened?
+- Run `curl http://localhost:8080/hello` -- what happened?
+- Run `curl http://localhost:8080/hello/proxy/node/python` -- what happened?
+
+Assuming everything is configured properly, you should see the
+`workshop-java-app` service in Jaeger.
+
+## Lab 103: Instrument another application and call it
+
+Instrument another application (another language). Follow Lab 101 for that
+other application. Then run `curl
+http://localhost:8080/hello/proxy/<otherLanguage>`. Are the traces stitched
+(spans from both applications in the same trace) in Jaeger?
+
+Let's change the context propagation mechanism. In this application (not the
+other) let's add one more environment variable:
+
+- In the `docker/docker-compose.yml` file, change the `environment` section of the java service:
+```
+    environment:
+      ...
+      OTEL_PROPAGATORS: b3multi,baggage
+```
+- Restart docker-compose as above.
+- Run `curl http://localhost:8080/hello/proxy/<otherLanguage>` -- what happened?
+
+Check the `workshop-java-app` in Jaeger now. What happened? Why?
 
 [otel-release]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest
 [otel-latest-jar]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent-all.jar
