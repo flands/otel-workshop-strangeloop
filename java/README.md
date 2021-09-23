@@ -82,7 +82,7 @@ other) let's add one more environment variable:
 ```
     environment:
       ...
-      OTEL_PROPAGATORS: b3multi,baggage
+      OTEL_PROPAGATORS: b3multi
 ```
 - Restart docker-compose as above.
 - Run `curl http://localhost:8080/hello/proxy/<otherLanguage>` -- what happened?

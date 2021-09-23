@@ -2,7 +2,7 @@
 
 Hello and welcome to the OpenTelemetry Workshop! Here you will learn how to:
 
-- Automatically instrumenting an application written in Java, Python, or Node
+- Automatically instrumenting an application written in Go, Java, Node, or Python
   with spans and sending the data to an APM tool like Jaeger.
 - Processing data including CRUD metadata operations via the OpenTelemetry
   Collector.
