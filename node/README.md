@@ -40,8 +40,21 @@ npm install \
   @opentelemetry/instrumentation-grpc \
   @opentelemetry/exporter-jaeger
 ```
+
+If you don't have `npm` installed locally, you can directly add the following dependencies to the `package.json` file,
+under the "node-fetch" entry:
+```
+    "@opentelemetry/api": "^1.0.3",
+    "@opentelemetry/exporter-jaeger": "^0.25.0",
+    "@opentelemetry/instrumentation-express": "^0.25.0",
+    "@opentelemetry/instrumentation-grpc": "^0.25.0",
+    "@opentelemetry/instrumentation-http": "^0.25.0",
+    "@opentelemetry/sdk-trace-base": "^0.25.0",
+    "@opentelemetry/sdk-trace-node": "^0.25.0"
+```
+
 - Initialize a global trace. Create a file named `tracing.js` and add the following code:
-```bash
+```javascript
 'use strict'
 
 const process = require('process');
@@ -81,6 +94,16 @@ process.on('SIGTERM', () => {
         .finally(() => process.exit(0));
 });
 ```
+- In the `Dockerfile`:
+  - Add a line to add the new `tracing.js` to the docker build :
+```dockerfile
+ADD tracing.js /app/
+```
+  - change the `CMD` line to read:
+```dockerfile
+CMD ["node", "-r", "./tracing.js", "app.js"]
+```
+
 - In the `docker/docker-compose.yml` file, add the following `environment` section to the node service:
 ```yaml
     environment:
