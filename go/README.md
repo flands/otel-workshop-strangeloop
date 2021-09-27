@@ -4,21 +4,21 @@
 
 Start the suite of interconnected apps:
 
-```
-$ cd ../docker; docker-compose up --build
+```bash
+cd ../docker; docker-compose up --build
 ```
 
 Then go to the url from outside the docker compose environment:
 
-```
-$ curl http://localhost:7070/hello/proxy/go
+```bash
+curl http://localhost:7070/hello/proxy/go
 ```
 
 You can also just build and start this application (instead of the full suite):
 
-```
-$ docker build -t otel-workshop-go .
-$ docker run -p7070:80 otel-workshop-go
+```bash
+docker build -t otel-workshop-go .
+docker run -p7070:80 otel-workshop-go
 ```
 
 ## Lab 101: Automatically instrumenting this application with OpenTelemetry
@@ -75,7 +75,7 @@ this exporter to take advantage of the OpenTelemety Collector that is running:
    The OTLP trace gRPC exporter does not need to be configured with any explicit URL,
    you will be setting that with environment variables.
 - In the `docker/docker-compose.yml` file, change the `environment` section of the go service:
-```
+```yaml
     environment:
       ...
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otelcol:4317
@@ -102,7 +102,7 @@ Let's change the context propagation mechanism. In this application (not the
 other) let's add one more environment variable:
 
 - In the `docker/docker-compose.yml` file, change the `environment` section of the go service:
-```
+```yaml
     environment:
       ...
       OTEL_PROPAGATORS: b3multi

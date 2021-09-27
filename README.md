@@ -2,7 +2,7 @@
 
 Hello and welcome to the OpenTelemetry Workshop! Here you will learn how to:
 
-- Automatically instrumenting an application written in Go, Java, Node, or Python.
+- Automatically instrumenting an application written in Java, Python, Node, or Go.
 - Send span data to an APM tool like Jaeger.
 - Processing data including CRUD metadata operations via the OpenTelemetry
   Collector.
@@ -25,10 +25,10 @@ $ cd docker
 $ docker-compose up --build
 ```
 
-- Go is listening outside docker on `7070`.
 - Java is listening outside docker on `8080`.
-- Node is listening outside docker on `3000`.
 - Python is listening outside docker on `5000`.
+- Node is listening outside docker on `3000`.
+- Go is listening outside docker on `7070`.
 
 Exercise the API:
 
@@ -49,12 +49,23 @@ http://localhost:16686.
 
 ## Labs
 
-- Lab 101: Complete one or more of the following:
-  - Instrument a Go application
-  - Instrument a Java application
-  - Instrument a NodeJS application
-  - Instrument a Python application
-- Lab 102: Reconfigure applications to leverage the OpenTelemetry Collector
+- Lab 101: Instrument an application. Complete one or more of the following:
+  - [Instrument a Java application](java#lab-101-automatically-instrumenting-this-application-with-opentelemetry)
+  - [Instrument a Python application](python#lab-101-automatically-instrumenting-this-application-with-opentelemetry)
+  - [Instrument a NodeJS application](node#lab-101-automatically-instrumenting-this-application-with-opentelemetry)
+  - [Instrument a Go application](go#lab-101-automatically-instrumenting-this-application-with-opentelemetry)
+- Lab 102: Reconfigure applications to leverage the OpenTelemetry Collector.
+  Complete one or more of the following:
+  - [Reconfigure a Java application](java#lab-102-send-data-to-the-opentelemetry-collector)
+  - [Reconfigure a Python application](python#lab-102-send-data-to-the-opentelemetry-collector)
+  - [Reconfigure a NodeJS application](node#lab-102-send-data-to-the-opentelemetry-collector)
+  - [Reconfigure a Go application](go#lab-102-send-data-to-the-opentelemetry-collector)
+- Lab 103: Change context propagation format. Complete one (only one) of the
+  following (requires you to instrument at least two applications):
+  - [Change context propagation in a Java application](java#lab-103-instrument-another-application-and-call-it)
+  - [Change context propagation in a Python application](python#lab-103-instrument-another-application-and-call-it)
+  - [Change context propagation in a NodeJS application](node#lab-103-instrument-another-application-and-call-it)
+  - [Change context propagation in a Go application](go#lab-103-instrument-another-application-and-call-it)
 - Lab 201: Processing trace data with the OpenTelemetry Collector
 - Lab 202: Collecting and processing metric data with the OpenTelemetry Collector
 - Lab 203: Collecting and processing log data with the OpenTelemetry Collector

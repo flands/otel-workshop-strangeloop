@@ -4,21 +4,21 @@
 
 Start the suite of interconnected apps:
 
-```
-$ cd ../docker; docker-compose up --build
+```bash
+cd ../docker; docker-compose up --build
 ```
 
 Then go to the url from outside the docker compose environment:
 
-```
-$ curl http://localhost:8080/hello/proxy/java
+```bash
+curl -i http://localhost:8080/hello/proxy/java
 ```
 
 You can also just build and start this application (instead of the full suite):
 
-```
-$ docker build -t otel-workshop-java .
-$ docker run -p8080:80 otel-workshop-java
+```bash
+docker build -t otel-workshop-java .
+docker run -p8080:80 otel-workshop-java
 ```
 
 ## Lab 101: Automatically instrumenting this application with OpenTelemetry
@@ -35,7 +35,7 @@ In summary, your task is to:
 - In the `build.gradle` file, inside the `application` block, change the `applicationDefaultJvmArgs` to be
   `['-Xmx128M', '-javaagent:opentelemetry-javaagent-all.jar']`
 - In the `docker/docker-compose.yml` file, add the following `environment` section to the java service:
-```
+```yaml
     environment:
       OTEL_TRACES_EXPORTER: jaeger
       OTEL_EXPORTER_JAEGER_ENDPOINT: http://jaeger:14250
@@ -56,7 +56,7 @@ Lab 101 we overrode this via environment variables. Let's modify them to take
 advantage of the OpenTelemety Collector that is running:
 
 - In the `docker/docker-compose.yml` file, change the `environment` section of the java service:
-```
+```yaml
     environment:
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otelcol:4317
       OTEL_SERVICE_NAME: workshop-java-app
@@ -83,7 +83,7 @@ Let's change the context propagation mechanism. In this application (not the
 other) let's add one more environment variable:
 
 - In the `docker/docker-compose.yml` file, change the `environment` section of the java service:
-```
+```yaml
     environment:
       ...
       OTEL_PROPAGATORS: b3multi
