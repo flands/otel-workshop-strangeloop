@@ -2,8 +2,8 @@
 
 Hello and welcome to the OpenTelemetry Workshop! Here you will learn how to:
 
-- Automatically instrumenting an application written in Go, Java, Node, or Python
-  with spans and sending the data to an APM tool like Jaeger.
+- Automatically instrumenting an application written in Go, Java, Node, or Python.
+- Send span data to an APM tool like Jaeger.
 - Processing data including CRUD metadata operations via the OpenTelemetry
   Collector.
 - Collecting host metrics and sending the data to a metrics tool like
@@ -15,7 +15,7 @@ Hello and welcome to the OpenTelemetry Workshop! Here you will learn how to:
 
 - Docker with `docker-compose`
 
-Optionally, it would be good to review [OpenTelemety
+Optionally, it would be good to review [OpenTelemetry
 concepts](https://opentelemetry.io/docs/concepts/).
 
 ## Getting Started
@@ -37,19 +37,19 @@ $ curl -i localhost:3000/hello
 $ curl -i localhost:8080/hello/proxy/python/node/java
 ```
 
-Once instrumented for OpenTelemetry, view traces in Jaeger:
-http://localhost:16686. Also note that an OpenTelemetry Collector is available
-and can receive data via:
+Other included components:
 
-- Jaeger inside docker on `14250` and `14268`
-- OTLP inside docker on `4317` and `4318`
-- Zipkin inside/outside docker on `9411`
-
-A Prometheus server which receives OpenTelemetry Collector metrics is available at http://localhost:9090.
+- Once instrumented with OpenTelemetry, view traces in Jaeger:
+http://localhost:16686.
+- An OpenTelemetry Collector is available and can receive data via:
+  - Jaeger inside docker on `14250` and `14268`
+  - OTLP inside docker on `4317` and `4318`
+  - Zipkin inside/outside docker on `9411`
+- A Prometheus server which receives OpenTelemetry Collector metrics is available at http://localhost:9090.
 
 ## Labs
 
-- Lab 101: Complete one or more of the following
+- Lab 101: Complete one or more of the following:
   - Instrument a Go application
   - Instrument a Java application
   - Instrument a NodeJS application
