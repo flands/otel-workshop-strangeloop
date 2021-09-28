@@ -33,36 +33,35 @@ In summary, your task is to:
 ```bash
 npm install \
   @opentelemetry/api \
-  @opentelemetry/sdk-trace-base \
-  @opentelemetry/sdk-trace-node \
-  @opentelemetry/instrumentation-http \
-  @opentelemetry/instrumentation-express \
-  @opentelemetry/instrumentation-grpc \
+  @opentelemetry/sdk-node \
+  @opentelemetry/auto-instrumentations-node \
   @opentelemetry/exporter-jaeger
 ```
+
+If you don't have `npm` installed locally, you can directly add the following dependencies to the `package.json` file,
+under the "node-fetch" entry:
+```
+    "@opentelemetry/api": "^1.0.3",
+    "@opentelemetry/auto-instrumentations-node": "^0.25.0",
+    "@opentelemetry/exporter-jaeger": "^0.25.0",
+    "@opentelemetry/sdk-node": "^0.25.0"
+```
+
 - Initialize a global trace. Create a file named `tracing.js` and add the following code:
-```bash
+```javascript
 'use strict'
 
-const process = require('process');
 const opentelemetry = require('@opentelemetry/sdk-node');
 const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node');
-const { ConsoleSpanExporter } = require('@opentelemetry/sdk-trace-base');
 const { JaegerExporter } = require('@opentelemetry/exporter-jaeger');
-const { Resource } = require('@opentelemetry/resources');
-const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
 const { diag, DiagConsoleLogger, DiagLogLevel} = require("@opentelemetry/api");
 
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG)
 
-console.log(process.env)
 // configure the SDK to export telemetry data to the console
 // enable all auto-instrumentations from the meta package
 const traceExporter = new JaegerExporter();
 const sdk = new opentelemetry.NodeSDK({
-    resource: new Resource({
-        [SemanticResourceAttributes.SERVICE_NAME]: 'workshop-node-app',
-    }),
     traceExporter,
     instrumentations: [getNodeAutoInstrumentations()]
 });
@@ -81,6 +80,16 @@ process.on('SIGTERM', () => {
         .finally(() => process.exit(0));
 });
 ```
+- In the `Dockerfile`:
+  - Add a line to add the new `tracing.js` to the docker build :
+```dockerfile
+ADD tracing.js /app/
+```
+  - change the `CMD` line to read:
+```dockerfile
+CMD ["node", "-r", "./tracing.js", "app.js"]
+```
+
 - In the `docker/docker-compose.yml` file, add the following `environment` section to the node service:
 ```yaml
     environment:
