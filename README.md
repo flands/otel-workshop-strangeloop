@@ -66,6 +66,6 @@ Other included components:
   - [Change context propagation in a Python application](python#lab-103-instrument-another-application-and-call-it)
   - [Change context propagation in a NodeJS application](node#lab-103-instrument-another-application-and-call-it)
   - [Change context propagation in a Go application](go#lab-103-instrument-another-application-and-call-it)
-- Lab 201: Processing trace data with the OpenTelemetry Collector
-- Lab 202: Collecting and processing metric data with the OpenTelemetry Collector
-- Lab 203: Collecting and processing log data with the OpenTelemetry Collector
+- [Lab 201: Processing trace data with the OpenTelemetry Collector](docker/lab200.md#lab-201-processing-trace-data-with-the-opentelemetry-collector)
+- [Lab 202: Collecting and processing metric data with the OpenTelemetry Collector](docker/lab200.md#lab-202-collecting-and-processing-metric-data-with-the-opentelemetry-collector)
+- [Lab 203: Collecting and processing log data with the OpenTelemetry Collector](docker/lab200.md#lab-203-collecting-and-processing-log-data-with-the-opentelemetry-collector)
