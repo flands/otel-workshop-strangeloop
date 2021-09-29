@@ -4,6 +4,8 @@ extensions:
     endpoint: 0.0.0.0:55679
 
 receivers:
+  collectd:
+    endpoint: 0.0.0.0:8081
   hostmetrics:
     collection_interval: 10s
     scrapers:
@@ -52,15 +54,12 @@ processors:
 exporters:
   # Metrics
   prometheus:
-    endpoint: prometheus:9091
+    endpoint: 0.0.0.0:9090
   # Traces
   jaeger:
     endpoint: jaeger:14250
     tls:
       insecure: true
-  sapm:
-    access_token: "${SPLUNK_ACCESS_TOKEN}"
-    endpoint: "https://app.signalfx.com/v2/trace"
   # Debug
   logging:
     #loglevel: debug

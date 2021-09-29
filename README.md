@@ -20,9 +20,9 @@ concepts](https://opentelemetry.io/docs/concepts/).
 
 ## Getting Started
 
-```
-$ cd docker
-$ docker-compose up --build
+```bash
+cd docker
+docker-compose up --build
 ```
 
 - Java is listening outside docker on `8080`.
@@ -32,20 +32,20 @@ $ docker-compose up --build
 
 Exercise the API:
 
-```
-$ curl -i localhost:3000/hello
-$ curl -i localhost:8080/hello/proxy/python/node/java
+```bash
+curl -i localhost:3000/hello
+curl -i localhost:8080/hello/proxy/python/node/java
 ```
 
 Other included components:
 
 - Once instrumented with OpenTelemetry, view traces in Jaeger:
-http://localhost:16686.
+`http://localhost:16686`.
 - An OpenTelemetry Collector is available and can receive data via:
   - Jaeger inside docker on `14250` and `14268`
   - OTLP inside docker on `4317` and `4318`
   - Zipkin inside/outside docker on `9411`
-- A Prometheus server which receives OpenTelemetry Collector metrics is available at http://localhost:9090.
+- A Prometheus server which receives OpenTelemetry Collector metrics is available at `http://localhost:9090`.
 
 ## Labs
 
