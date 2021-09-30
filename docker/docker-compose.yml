@@ -34,6 +34,7 @@ services:
   ### 2xx Labs
   otelcol:
     image: otel/opentelemetry-collector-contrib:latest
+    #command: --config=/etc/otel/config.yaml --log-level=debug
     depends_on:
       - jaeger
       - prometheus
@@ -42,11 +43,13 @@ services:
     ports:
       - "4317:4317"   # otlp
       - "55679:55679" # zpages
+      - "8081:8081"   # collectd
       - "8888:8888"   # metrics
       - "9091:9090"   # prometheus
       - "9411:9411"   # zipkin
     volumes:
       - ./configs:/etc/otel
+      - ./data:/data
 
   ### SHOULD NOT NEED TO TOUCH THESE
   jaeger:
@@ -57,6 +60,7 @@ services:
       - "14250:14250" # proto ingest
   prometheus:
     image: quay.io/prometheus/prometheus:latest
+    #command: --config.file=/etc/prometheus/prometheus.yml --log.level=debug
     cpus: 0.5
     mem_limit: 512m
     ports:

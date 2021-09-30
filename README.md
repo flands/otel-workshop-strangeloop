@@ -20,9 +20,9 @@ concepts](https://opentelemetry.io/docs/concepts/).
 
 ## Getting Started
 
-```
-$ cd docker
-$ docker-compose up --build
+```bash
+cd docker
+docker-compose up --build
 ```
 
 - Java is listening outside docker on `8080`.
@@ -32,9 +32,9 @@ $ docker-compose up --build
 
 Exercise the API:
 
-```
-$ curl -i localhost:3000/hello
-$ curl -i localhost:8080/hello/proxy/python/node/java
+```bash
+curl -i localhost:3000/hello
+curl -i localhost:8080/hello/proxy/python/node/java
 ```
 
 Other included components:
@@ -66,6 +66,6 @@ http://localhost:16686.
   - [Change context propagation in a Python application](python#lab-103-instrument-another-application-and-call-it)
   - [Change context propagation in a NodeJS application](node#lab-103-instrument-another-application-and-call-it)
   - [Change context propagation in a Go application](go#lab-103-instrument-another-application-and-call-it)
-- Lab 201: Processing trace data with the OpenTelemetry Collector
-- Lab 202: Collecting and processing metric data with the OpenTelemetry Collector
-- Lab 203: Collecting and processing log data with the OpenTelemetry Collector
+- [Lab 201: Processing trace data with the OpenTelemetry Collector](docker/lab200.md#lab-201-processing-trace-data-with-the-opentelemetry-collector)
+- [Lab 202: Collecting and processing metric data with the OpenTelemetry Collector](docker/lab200.md#lab-202-collecting-and-processing-metric-data-with-the-opentelemetry-collector)
+- [Lab 203: Collecting and processing log data with the OpenTelemetry Collector](docker/lab200.md#lab-203-collecting-and-processing-log-data-with-the-opentelemetry-collector)

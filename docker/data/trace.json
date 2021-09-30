@@ -1,0 +1,21 @@
+[
+  {
+    "traceId": "a03ee8fff1dcd9b9",
+    "id": "7a778764a0d0b594",
+    "kind": "SERVER",
+    "name": "/foo/bar",
+    "timestamp": 1571896375310740,
+    "duration": 1490,
+    "localEndpoint": {
+      "serviceName": "spectre"
+    },
+    "tags": {
+      "http.method": "GET",
+      "http.status_code": "200",
+      "http.target": "/foo/bar?items=5",
+      "user": "bob@splunk.com",
+      "ssn": "123-45-6789"
+    },
+    "shared": true
+  }
+]
