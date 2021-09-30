@@ -83,8 +83,11 @@ http://localhost:5000/hello/proxy/<otherLanguage>`.
 
 > Question: What do you see in Jaeger now?
 
-Let's change the context propagation mechanism. In this application (not the
-other) let's add one more environment variable:
+Let's change the context propagation mechanism. 
+
+First, add `opentelemetry-propagator-b3==1.5.0` to the `requirements.txt` to get the b3 propagator installed.
+
+In this application (not the other) let's add one more environment variable:
 
 - In the `docker/docker-compose.yml` file, change the `environment` section of the python service:
 ```yaml
