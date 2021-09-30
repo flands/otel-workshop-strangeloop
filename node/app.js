@@ -1,5 +1,5 @@
-import fetch from "node-fetch";
-import express from 'express';
+const fetch = require("node-fetch");
+const express = require('express');
 
 const app = express();
 const port = 80;
