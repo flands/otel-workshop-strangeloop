@@ -109,24 +109,22 @@ Assuming everything is configured properly, you should see the
 By default, the OTLP gRPC exporter sends data to `localhost:4317`. Let's use
 this exporter to take advantage of the OpenTelemety Collector that is running:
 
-- Install the required dependency
-```bash
-npm install --save @opentelemetry/exporter-otlp-grpc
-```
+- Install the required dependency: 
+  Add  `"@opentelemetry/exporter-collector-grpc": "^0.25.0"` as a dependency to the `package.json` file
 - Update tracing.js to contain:
 ```bash
 const { BasicTracerProvider, SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
-const { OTLPTraceExporter } =  require('@opentelemetry/exporter-otlp-grpc');
+const { CollectorTraceExporter } =  require('@opentelemetry/exporter-collector-grpc');
 
 const provider = new BasicTracerProvider();
-const exporter = new OTLPTraceExporter();
+const exporter = new CollectorTraceExporter();
 provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
 ```
 - In the `docker/docker-compose.yml` file, change the `environment` section of the node service:
 ```yaml
     environment:
       ...
-      OTEL_EXPORTER_OTLP_ENDPOINT: http://otelcol:4317
+      OTEL_EXPORTER_OTLP_ENDPOINT: 'http://otelcol:4317'
 ```
 - Restart docker-compose as above.
 - Run `curl -i http://localhost:3000/` -- what happened?
